@@ -1,0 +1,341 @@
+/* Schedule */
+.section.main-section-schedule {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.schedule-bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.schedule-bg > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.2);
+  transition: transform 1s 0.4s;
+}
+
+.active .schedule-bg > img {
+  transform: scale(1);
+  transition: transform 3s 0.4s;
+}
+
+.schedule-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  text-align: center;
+  height: 100%;
+  width: clamp(900px, 78vw, 1100px);
+  max-width: none;
+  margin: 0 auto;
+  padding-top: clamp(120px, 12vh, 160px);
+  box-sizing: border-box;
+}
+
+.schedule-sign {
+  font-family: 'Italiana', serif;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 50px;
+  transform: rotate(-15deg) translateX(-240px);
+  opacity: 0;
+  transition: transform 1s 0.4s, opacity 1s 0.4s;
+}
+
+.active .schedule-sign {
+  transform: rotate(-15deg) translateX(-180px);
+  opacity: 1;
+}
+
+.schedule-title {
+  color: #ffffff;
+  font-size: 78px;
+  margin-bottom: 10px;
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 700;
+}
+
+.schedule-title .char {
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 700;
+  opacity: 0;
+}
+
+.schedule-desc {
+  font-size: 16px;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+  margin-bottom: 35px;
+  transform: translateY(50px);
+  opacity: 0;
+  transition: transform 1s 0.4s, opacity 1s 0.4s;
+}
+
+.active .schedule-desc {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.schedule-table-box {
+  width: 100%;
+  position: relative;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.schedule-table {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 15px;
+  width: 100%;
+}
+
+.schedule-table > li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+  gap: 10px;
+  background: #c16d60;
+  grid-column: span 1;
+  aspect-ratio: 320 / 184;
+  border: 1px solid #7e7e7e;
+  color: #ffffff;
+  transition: color 0.5s;
+  opacity: 0;
+  transform: scale(0.8);
+  padding: 54px 0 33px;
+}
+
+.schedule-table > li.wide {
+  grid-column: span 1;
+}
+
+.active .schedule-table > li {
+  opacity: 1;
+  transform: scale(1);
+  transition: transform 0.7s, opacity 0.7s;
+}
+
+.schedule-table .day {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffffff;
+  min-height: 2.2em;
+  line-height: 1.1;
+  transition: color 0.5s;
+}
+
+.schedule-table > li:first-child .day {
+  font-size: 38px;
+}
+
+.schedule-table > li:hover .day {
+  color: var(--color-sand);
+}
+
+.schedule-table > li.is-highlight .day {
+  color: #ffffff;
+  background: linear-gradient(
+    120deg,
+    #ffffff 0%,
+    #ffffff 35%,
+    #ffe08a 50%,
+    #ffffff 65%,
+    #ffffff 100%
+  );
+  background-size: 320% 100%;
+  background-position: -160% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow:
+    0 0 10px rgba(255, 255, 255, 0.6),
+    0 0 22px rgba(255, 200, 120, 0.55);
+  animation: schedule-shimmer 2.2s ease-in-out infinite;
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.35));
+}
+
+@keyframes schedule-shimmer {
+  0% {
+    background-position: -160% 50%;
+  }
+  100% {
+    background-position: 160% 50%;
+  }
+}
+
+.schedule-table .con {
+  font-size: 36px;
+  font-family: 'Pretendard', sans-serif;
+  line-height: 1.1;
+  font-weight: 700;
+  transition: color 0.5s;
+}
+
+.schedule-table .con-text {
+  display: inline-block;
+  white-space: nowrap;
+  word-break: keep-all;
+}
+
+.schedule-table > li:hover .con {
+  color: var(--color-sand);
+}
+
+.schedule-btn-box {
+  display: flex;
+  gap: 19px;
+  align-self: end;
+  margin-top: 27px;
+  transform: translateX(100px);
+  opacity: 0;
+  transition: transform 1s 0.4s, opacity 1s 0.4s;
+}
+
+.active .schedule-btn-box {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.schedule-btn-box > a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 213px;
+  height: 65px;
+  border: 1px solid #ffffff;
+  border-radius: 100px;
+  padding: 0 20px;
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 700;
+  transition: background 0.5s, color 0.5s, border-color 0.5s;
+}
+
+.schedule-btn-box > a > img {
+  filter: brightness(10);
+}
+
+.schedule-btn-box > a:hover {
+  color: var(--color-sand);
+  border-color: var(--color-sand);
+}
+
+.schedule-btn-box > a:hover > img {
+  filter: brightness(1);
+}
+
+.schedule-rotate-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #2b5151;
+  position: absolute;
+  font-weight: 700;
+  font-size: 15px;
+  right: 0;
+  top: 0;
+  transform: translateX(50%) translateY(-50%) scale(0);
+  transition: transform 1s 0.4s;
+  z-index: 1;
+}
+
+.active .schedule-rotate-btn {
+  transform: translateX(50%) translateY(-50%) scale(1);
+  transition: transform 1s 1s;
+}
+
+.schedule-rotate-text {
+  position: absolute;
+  width: 118px;
+  height: 118px;
+  animation: rotate-text 6s infinite linear;
+}
+
+.schedule-rotate-text text {
+  font-size: 16px;
+  letter-spacing: 0.2em;
+  fill: #2b5151;
+  font-weight: 600;
+}
+
+
+/* Hover animation lines */
+.hover_ani {
+  position: relative;
+}
+
+.hover_ani > span.line {
+  position: absolute;
+  transition: width 0.5s, height 0.5s;
+  background: #ffffff;
+}
+
+.hover_ani > span.line:nth-child(1) {
+  width: 0;
+  height: 1px;
+  left: 0;
+  top: 0;
+}
+
+.hover_ani > span.line:nth-child(2) {
+  width: 1px;
+  height: 0;
+  right: 0;
+  top: 0;
+}
+
+.hover_ani > span.line:nth-child(3) {
+  width: 0;
+  height: 1px;
+  right: 0;
+  bottom: 0;
+}
+
+.hover_ani > span.line:nth-child(4) {
+  width: 1px;
+  height: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.hover_ani:hover > span.line:nth-child(1),
+.hover_ani:hover > span.line:nth-child(3) {
+  width: 100%;
+  height: 1px;
+}
+
+.hover_ani:hover > span.line:nth-child(2),
+.hover_ani:hover > span.line:nth-child(4) {
+  width: 1px;
+  height: 100%;
+}
+.schedule-table .point {
+  font-size: 36px;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1;
+  display: inline-block;
+}

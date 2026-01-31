@@ -1,0 +1,219 @@
+/* Inquiry */
+.main-section-inquiry {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: clamp(90px, 10vh, 140px) 0;
+  background: linear-gradient(135deg, #f7f2ed 0%, #ffffff 45%, #f1ebe6 100%);
+  overflow: hidden;
+}
+
+.main-section-inquiry::before {
+  position: absolute;
+  content: '';
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: rgba(195, 160, 126, 0.18);
+  top: -200px;
+  right: -140px;
+  filter: blur(2px);
+}
+
+.main-section-inquiry::after {
+  position: absolute;
+  content: '';
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: rgba(20, 65, 57, 0.1);
+  bottom: -200px;
+  left: -120px;
+  filter: blur(3px);
+}
+
+.inquiry-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1500px;
+  padding: 0 clamp(20px, 4vw, 60px);
+  display: grid;
+  grid-template-columns: minmax(280px, 0.9fr) minmax(320px, 1.2fr);
+  gap: clamp(24px, 6vw, 90px);
+  align-items: center;
+}
+
+.inquiry-title-box {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  transform: translateY(40px);
+  opacity: 0;
+  transition: transform 0.9s ease, opacity 0.9s ease;
+}
+
+.active .inquiry-title-box {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.inquiry-sign {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: #8a796f;
+}
+
+.inquiry-title {
+  font-size: clamp(36px, 4.2vw, 72px);
+  font-weight: 600;
+  color: #111111;
+  line-height: 1.1;
+}
+
+.inquiry-title > span {
+  display: block;
+  font-family: 'Italiana', serif;
+  font-weight: 400;
+  color: var(--color-accent);
+  font-size: clamp(22px, 2.5vw, 40px);
+  margin-top: 8px;
+}
+
+.inquiry-desc {
+  font-size: clamp(14px, 1.4vw, 18px);
+  color: #4d4d4d;
+  letter-spacing: -0.03em;
+}
+
+.inquiry-note {
+  font-size: 13px;
+  color: #8d837c;
+}
+
+.inquiry-form {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  display: grid;
+  gap: 24px;
+  transform: translateY(40px);
+  opacity: 0;
+  transition: transform 0.9s ease 0.1s, opacity 0.9s ease 0.1s;
+}
+
+.active .inquiry-form {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.inquiry-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px 20px;
+  padding-left: clamp(0px, 2vw, 20px);
+  border-left: 1px solid rgba(20, 65, 57, 0.12);
+}
+
+.inquiry-field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 14px;
+  color: #2b2b2b;
+}
+
+.inquiry-field span {
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.inquiry-field em {
+  color: #c16d60;
+  font-style: normal;
+}
+
+.inquiry-field input,
+.inquiry-field select {
+  height: 48px;
+  border-radius: 12px;
+  border: 1px solid rgba(17, 17, 17, 0.15);
+  background: #f9f6f3;
+  padding: 0 16px;
+  font-size: 15px;
+  color: #111111;
+  transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.inquiry-time-select {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.inquiry-field input:focus,
+.inquiry-field select:focus {
+  outline: none;
+  border-color: rgba(20, 65, 57, 0.55);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(20, 65, 57, 0.12);
+}
+
+.inquiry-consent {
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #2b2b2b;
+  padding-left: clamp(0px, 2vw, 20px);
+}
+
+.inquiry-consent input {
+  width: 18px;
+  height: 18px;
+  accent-color: #c16d60;
+}
+
+.inquiry-actions {
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-left: clamp(0px, 2vw, 20px);
+}
+
+.inquiry-helper {
+  font-size: 13px;
+  color: #6f6a66;
+}
+
+.inquiry-submit {
+  border: none;
+  background: #c16d60;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 14px 36px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.inquiry-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(193, 109, 96, 0.3);
+}
+
+.inquiry-submit:active {
+  transform: translateY(0);
+}

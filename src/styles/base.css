@@ -1,0 +1,149 @@
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../assets/fonts/Pretendard-Thin.woff2') format('woff2');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../assets/fonts/Pretendard-ExtraLight.woff2') format('woff2');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../assets/fonts/Pretendard-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../assets/fonts/Pretendard-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../assets/fonts/Pretendard-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../assets/fonts/Pretendard-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../assets/fonts/Pretendard-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../assets/fonts/Pretendard-ExtraBold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('../assets/fonts/Pretendard-Black.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --color-primary: #144139;
+  --color-accent: #725f57;
+  --color-dark: #111111;
+  --color-light: #ffffff;
+  --color-muted: #8e8e8e;
+  --color-sand: #c3a07e;
+  --header-height: 100px;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  color: var(--color-dark);
+  background-color: var(--color-light);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  background: #ffffff;
+  overflow-x: hidden;
+  line-height: 1.5;
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.public-page {
+  background: #ffffff;
+}
+
+.public-section {
+  scroll-margin-top: var(--header-height);
+}
+
+#wrap {
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+.pcView {
+  display: block !important;
+}
+
+.moView {
+  display: none !important;
+}
