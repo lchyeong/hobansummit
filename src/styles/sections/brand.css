@@ -20,6 +20,7 @@
 .brand-card-section {
   position: relative;
   background: #c16d60;
+  z-index: 3;
 }
 
 .card-box {

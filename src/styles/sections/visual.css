@@ -45,6 +45,7 @@
   bottom: 20px;
   color: #ffffff;
   text-align: right;
+  white-space: nowrap;
 }
 
 .visual-inner {
@@ -58,11 +59,11 @@
   padding-top: clamp(120px, 12vh, 160px);
 }
 
- .visual-title {
+.visual-title {
   font-family: 'Pretendard', 'Noto Sans KR', serif;
-  font-size: clamp(38px, 4.6vw, 68px);
+  font-size: clamp(32px, 4vw, 60px);
   letter-spacing: -0.01em;
-  font-weight: 700;
+  font-weight: 400;
   line-height: 1.38;
   color: #1f2933;
   text-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
@@ -70,8 +71,16 @@
   margin: 0 auto;
 }
 
-.visual-title b {
-  font-weight: 500;
+.visual-title-line {
+  margin: 0;
+}
+
+.visual-title-soft {
+  font-weight: 400;
+}
+
+.visual-title-strong {
+  font-weight: 800;
 }
 
 .visual-title-emph {
@@ -90,7 +99,7 @@
 
 .visual-highlight {
   font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
-  font-size: clamp(40px, 6vw, 72px);
+  font-size: clamp(34px, 5.4vw, 64px);
   font-weight: 700;
   letter-spacing: -0.02em;
   color: #111827;

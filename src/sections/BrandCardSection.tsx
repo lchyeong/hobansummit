@@ -69,6 +69,8 @@ const BrandCardSection = () => {
       const logoImgs = selector('.card-desc-logo img');
 
       if (!cardSlide || !cardBox || !card1 || !card2 || !card3) return;
+      const isMobile = window.matchMedia('(max-width: 1200px)').matches
+        || window.matchMedia('(pointer: coarse)').matches;
 
       const getOffsets = () => {
         const style = window.getComputedStyle(cardBox);
@@ -138,10 +140,10 @@ const BrandCardSection = () => {
         id: 'brand-card-pin',
         trigger: sectionRef.current,
         start: 'top top',
-        end: '+=300%',
+        end: isMobile ? 'bottom top' : '+=300%',
         scrub: true,
-        pin: cardSlide,
-        pinSpacing: true,
+        pin: isMobile ? false : cardSlide,
+        pinSpacing: !isMobile,
         anticipatePin: 1,
         invalidateOnRefresh: true,
         refreshPriority: -1,
