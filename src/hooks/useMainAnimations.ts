@@ -8,6 +8,7 @@ import { Autoplay, Navigation } from 'swiper/modules';
 const useMainAnimations = () => {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.config({ autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load' });
     const createdTriggers: ScrollTrigger[] = [];
 
     const visualSplit = new SplitType('.visual-title > p', { types: 'chars' });
@@ -86,8 +87,14 @@ const useMainAnimations = () => {
     });
 
     const landSwiper = new Swiper('.land-slide', {
-      modules: [Navigation],
+      modules: [Navigation, Autoplay],
       speed: 1000,
+      loop: true,
+      autoplay: {
+        delay: 7000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+      },
       allowTouchMove: isMobile,
     });
 
@@ -95,6 +102,10 @@ const useMainAnimations = () => {
     const landDotHandlers = landDots.map((dot, index) => {
       const handler = () => {
         const targetIndex = Number(dot.dataset.index ?? index);
+        if (landSwiper.params.loop) {
+          landSwiper.slideToLoop(targetIndex);
+          return;
+        }
         landSwiper.slideTo(targetIndex);
       };
       dot.addEventListener('click', handler);
@@ -194,23 +205,25 @@ const useMainAnimations = () => {
 
     const premiumSlides = document.querySelectorAll('.premium-desc-box > div');
     const premiumCount = Math.max(1, premiumSlides.length);
-    const premiumTransitions = Math.max(1, premiumCount - 1);
     const premiumCredits = document.querySelectorAll('.premium-image-credit > span');
-    const premiumScrollPerSlide = isMobile ? 1.6 : 1.2;
-    const premiumEnd = () =>
-      `+=${Math.round(window.innerHeight * premiumTransitions * premiumScrollPerSlide)}`;
+    const premiumEnd = () => {
+      const width = window.innerWidth;
+      if (width < 768) return '+=1000%';
+      if (width < 1600) return '+=650%';
+      return '+=650%';
+    };
     const premiumTl = gsap.timeline({
       defaults: { ease: 'none' },
       scrollTrigger: {
         id: 'premium-pin',
-        trigger: '.premium-pin',
-        start: 'top top',
+        trigger: '.main-section-premium',
+        start: 'top',
         end: premiumEnd,
         scrub: true,
         pin: true,
         pinSpacing: true,
         invalidateOnRefresh: true,
-        anticipatePin: 2,
+        anticipatePin: 0,
       },
     });
     if (premiumTl.scrollTrigger) createdTriggers.push(premiumTl.scrollTrigger);
@@ -307,12 +320,7 @@ const useMainAnimations = () => {
     window.addEventListener('scroll', handleScrollIndicator);
     handleScrollIndicator();
 
-    const refreshTimeout = window.setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 500);
-
     return () => {
-      window.clearTimeout(refreshTimeout);
       window.removeEventListener('scroll', handleScrollIndicator);
       visualSplit.revert();
       scheduleSplit.revert();

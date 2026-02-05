@@ -8,32 +8,27 @@ const useSmoothScroll = () => {
     document.documentElement.style.scrollBehavior = 'auto';
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const isTouch = window.matchMedia('(pointer: coarse)').matches;
 
-    if (prefersReducedMotion || isTouch) {
+    if (prefersReducedMotion) {
       return () => {
         document.documentElement.style.scrollBehavior = previousBehavior;
       };
     }
 
     const lenis = new Lenis({
-      duration: 1.1,
+      duration: 1.6,
       smoothWheel: true,
-      syncTouch: false,
+      syncTouch: true,
       orientation: 'vertical',
       gestureOrientation: 'vertical',
-      touchMultiplier: 1,
+      touchMultiplier: 0.9,
       infinite: false,
     });
-
-    const onScroll = () => {
-      ScrollTrigger.update();
-    };
-    lenis.on('scroll', onScroll);
 
     let rafId = 0;
     const raf = (time: number) => {
       lenis.raf(time);
+      ScrollTrigger.update();
       rafId = requestAnimationFrame(raf);
     };
 
@@ -41,7 +36,6 @@ const useSmoothScroll = () => {
 
     return () => {
       cancelAnimationFrame(rafId);
-      lenis.off('scroll', onScroll);
       lenis.destroy();
       document.documentElement.style.scrollBehavior = previousBehavior;
     };

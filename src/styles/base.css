@@ -136,7 +136,7 @@ ul {
 }
 
 #wrap {
-  overflow-y: visible;
+  overflow: hidden;
 }
 
 .pcView {

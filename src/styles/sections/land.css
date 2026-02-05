@@ -237,8 +237,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 10px;
-  height: 10px;
+  width: 14px;
+  height: 14px;
   background: #d5d5d5;
   border-radius: 50%;
   cursor: pointer;
@@ -254,8 +254,8 @@
 .land-pagination > li::after {
   position: absolute;
   content: '';
-  width: 28px;
-  height: 28px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   border: 1px solid #c16d60;
   transition: transform 0.3s;

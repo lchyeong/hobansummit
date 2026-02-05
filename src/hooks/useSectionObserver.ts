@@ -18,7 +18,7 @@ const useSectionObserver = () => {
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.05 }
     );
 
     sections.forEach((section) => observer.observe(section));

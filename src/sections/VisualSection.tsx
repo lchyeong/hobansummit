@@ -15,15 +15,13 @@ const VisualSection = () => {
         <h2 className="visual-title">
           <p className="visual-title-line">
             <span className="visual-title-strong">옥계의 중심</span>
-            에서 시작되는 새로운 기준
           </p>
-          <p className="visual-title-line visual-title-soft">2,092세대 대단지 스케일</p>
-          <p className="visual-title-line">
-            <span className="visual-title-strong">현금 지원 혜택</span>으로 만나는 기회
+          <p className="visual-title-line visual-title-soft">
+            <span className="visual-title-strong">2,092세대 대단지</span>
           </p>
         </h2>
         <p className="visual-highlight">
-          <span className="visual-highlight-number">1200만원</span>
+          <span className="visual-highlight-number">1,200만원</span> 현금 지원
         </p>
         <p className="visual-logo">구미 옥계 호반 써밋 엘리트시티</p>
       </div>

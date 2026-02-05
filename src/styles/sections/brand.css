@@ -23,6 +23,20 @@
   z-index: 3;
 }
 
+.brand-entry {
+  height: 0;
+}
+
+.brand-pin {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .card-box {
   width: clamp(280px, 24vw, 387px);
   height: clamp(340px, 30vw, 481px);

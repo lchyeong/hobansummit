@@ -58,6 +58,7 @@ const BrandCardSection = () => {
 
     const ctx = gsap.context(() => {
       const cardSlide = selector('.card-slide')[0] as HTMLElement | undefined;
+      const pinWrap = selector('.brand-pin')[0] as HTMLElement | undefined;
       const cardBox = selector('.card-box')[0] as HTMLElement | undefined;
       const card1 = selector('.card1')[0] as HTMLElement | undefined;
       const card2 = selector('.card2')[0] as HTMLElement | undefined;
@@ -135,14 +136,20 @@ const BrandCardSection = () => {
         .to(card2, { yPercent: -200, duration: 1 }, 1)
         .to(card3, { y: 0, duration: 1 }, 1);
 
+      const cardSteps = 2;
+      const scrollFactor = isMobile ? 0.85 : 1.8;
+      const getPinDistancePx = () =>
+        Math.round(window.innerHeight * cardSteps * scrollFactor);
+      const pinDistance = () => `+=${getPinDistancePx()}`;
+
       ScrollTrigger.create({
         id: 'brand-card-pin',
-        trigger: sectionRef.current,
+        trigger: pinWrap ?? sectionRef.current,
         start: 'top top',
-        end: isMobile ? 'bottom top' : '+=360%',
+        end: pinDistance,
         scrub: true,
-        pin: isMobile ? false : cardSlide,
-        pinSpacing: !isMobile,
+        pin: cardSlide,
+        pinSpacing: true,
         anticipatePin: 1,
         invalidateOnRefresh: true,
         refreshPriority: -1,
@@ -182,12 +189,7 @@ const BrandCardSection = () => {
       });
     }, sectionRef);
 
-    const handleLoad = () => ScrollTrigger.refresh();
-    window.addEventListener('load', handleLoad);
-    requestAnimationFrame(() => ScrollTrigger.refresh());
-
     return () => {
-      window.removeEventListener('load', handleLoad);
       cardTargets.forEach((target) => {
         target.removeEventListener('mousemove', onMouseMove);
         target.removeEventListener('mouseleave', onMouseLeave);
@@ -198,10 +200,12 @@ const BrandCardSection = () => {
 
   return (
     <section ref={sectionRef} id="brand" className="brand-card-section public-section" data-theme="light">
-      <div className="card-slide">
-        <div className="card-desc1">
-          <div className="card-desc-01">
-            <div>
+      <div className="brand-entry" aria-hidden="true" />
+      <div className="brand-pin">
+        <div className="card-slide">
+          <div className="card-desc1">
+            <div className="card-desc-01">
+              <div>
               <p className="card-desc-title">SUMMIT</p>
             </div>
             <div>
@@ -266,10 +270,10 @@ const BrandCardSection = () => {
             />
           </div>
         </div>
-        <div className="card-desc2">
-          <div className="card-desc-01">
-            <div>
-              <p>완성도 높은</p>
+          <div className="card-desc2">
+            <div className="card-desc-01">
+              <div>
+                <p>완성도 높은</p>
             </div>
             <div>
               <p>단지 설계</p>
@@ -292,6 +296,7 @@ const BrandCardSection = () => {
             </div>
             <div>
               <p>라이프</p>
+            </div>
             </div>
           </div>
         </div>

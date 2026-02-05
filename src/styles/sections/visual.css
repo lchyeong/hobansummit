@@ -81,6 +81,7 @@
 
 .visual-title-strong {
   font-weight: 800;
+  font-size: 1.08em;
 }
 
 .visual-title-emph {
@@ -126,10 +127,12 @@
 }
 
 .visual-logo {
-  font-size: clamp(14px, 1.6vw, 22px);
+  font-size: clamp(15px, 1.8vw, 24px);
   font-weight: 500;
   letter-spacing: -0.01em;
-  color: #8b7a74;
+  color: #2b3a4a;
+  font-weight: 600;
+  text-shadow: none;
   margin-top: 24px;
   transform: translateY(50px);
   opacity: 0;

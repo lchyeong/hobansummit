@@ -1,4 +1,4 @@
-@media (max-width: 1600px) {
+@media (max-width: 1800px) {
   .green-slide-inner {
     padding-bottom: clamp(40px, 10vh, 120px);
   }
@@ -20,6 +20,10 @@
 
   .green-title > span {
     font-size: 40px;
+    left: 0;
+    top: auto;
+    bottom: 90%;
+    transform: rotate(0deg);
   }
 
   .green-desc {
@@ -32,17 +36,22 @@
   }
 
   .green-right {
-    --green-hero-width: min(60vw, 900px);
+    --green-hero-width: min(80vw, 800px);
+    --green-hero-max-height: calc(100dvh - 200px);
+    --green-circle-size: clamp(110px, calc(var(--green-hero-width) * 0.2), 180px);
+    --green-circle-gap: clamp(10px, calc(var(--green-hero-width) * 0.018), 20px);
+    --green-circle-offset: clamp(10px, calc(var(--green-hero-width) * 0.02), 28px);
   }
 
   .green-image-wrap {
-    width: 100%;
-    padding-bottom: 0;
+    width: var(--green-hero-width);
+    max-width: 100%;
+    padding-bottom: calc(var(--green-circle-size) * 0.9);
     transform: none;
   }
 
   .green-right .green-img {
-    max-height: none;
+    max-height: var(--green-hero-max-height);
   }
 
   .green-image-wrap {
@@ -50,7 +59,7 @@
   }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1200px), (max-height: 700px) {
   :root {
     --header-height: 80px;
   }
@@ -374,7 +383,7 @@
   .schedule-inner {
     width: 100%;
     max-width: none;
-    padding: 50px 20px 80px;
+    padding: 50px 20px clamp(120px, 15vh, 200px);
   }
 
   .schedule-sign {
@@ -421,10 +430,6 @@
     font-size: 16px;
   }
 
-  .schedule-table > li:first-child .day {
-    font-size: 20px;
-  }
-
   .schedule-table .point {
     font-size: clamp(22px, 3.2vw, 26px);
     line-height: 1.15;
@@ -440,7 +445,7 @@
   }
 
   .schedule-btn-box {
-    margin-top: 16px;
+    margin-top: 40px;
     gap: 10px;
   }
 
@@ -824,8 +829,7 @@
     --card-offset-1: 6px;
     --card-offset-2: 12px;
     min-height: calc(var(--card-height) + var(--card-text-block));
-    position: sticky;
-    top: 0;
+    position: relative;
   }
 
   .card-desc1,
@@ -895,8 +899,13 @@
     height: var(--card-height);
   }
 
-  .brand-card-section {
-    min-height: 400svh;
+  .brand-entry {
+    height: clamp(50px, 10vh, 120px);
+  }
+
+  .brand-pin {
+    height: auto;
+    min-height: 0;
   }
 
   .inquiry-inner {
@@ -973,16 +982,16 @@
   }
 
   .green-right {
-    align-items: center;
+    --green-hero-max-height: calc(100dvh - 220px);
   }
 
   .green-image-wrap {
     padding-bottom: clamp(0px, 3vh, 40px);
-    transform: none;
+    transform: translateY(clamp(24px, 6vh, 68px));
   }
 
   .green-right .green-img {
-    max-height: calc(100dvh - 220px);
+    max-height: var(--green-hero-max-height);
     width: auto;
     max-width: 100%;
   }
@@ -1017,7 +1026,7 @@
   }
 
   .visual-logo {
-    font-size: 18px;
+    font-size: clamp(15px, 1.8vw, 24px);
   }
 }
 
@@ -1053,10 +1062,6 @@
 
   .schedule-table .day {
     font-size: clamp(14px, 3vw, 16px);
-  }
-
-  .schedule-table > li:first-child .day {
-    font-size: clamp(16px, 3.4vw, 18px);
   }
 
   .schedule-table .point {
@@ -1174,10 +1179,6 @@
 
   .schedule-table .day {
     font-size: clamp(12px, 3.4vw, 14px);
-  }
-
-  .schedule-table > li:first-child .day {
-    font-size: clamp(15px, 4vw, 17px);
   }
 
   .schedule-table .point {
