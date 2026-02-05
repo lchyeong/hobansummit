@@ -75,68 +75,71 @@ const premiumSlides = [
 const PremiumSection = () => {
   return (
     <section id="premium" className="main-section-premium public-section" data-theme="light">
-      <div className="premium-bg">
-        {premiumBackgrounds.map((bg, index) => (
-          <img
-            key={`premium-bg-${index}`}
-            src={bg.pc}
-            srcSet={`${bg.mo} 1200w, ${bg.pc} 2400w`}
-            sizes="100vw"
-            alt=""
-            loading="lazy"
-            decoding="async"
-          />
-        ))}
-      </div>
-      <div className="premium-inner">
-        <div className="premium-box">
-          <div className="premium-box-img">
-            {premiumImages.map((image, index) => (
-              <img
-                key={`premium-img-${index}`}
-                src={image.pc}
-                srcSet={`${image.mo} 1200w, ${image.pc} 2400w`}
-                sizes="(max-width: 1200px) 80vw, 40vw"
-                alt=""
-                loading="lazy"
-                decoding="async"
-              />
-            ))}
-            <div className="premium-image-credit">
-              {premiumImageCredits.map((credit, index) => (
-                <span key={`premium-credit-${index}`} className={credit ? '' : 'is-empty'}>
-                  {credit}
-                </span>
+      <div className="premium-entry" aria-hidden="true" />
+      <div className="premium-pin">
+        <div className="premium-bg">
+          {premiumBackgrounds.map((bg, index) => (
+            <img
+              key={`premium-bg-${index}`}
+              src={bg.pc}
+              srcSet={`${bg.mo} 1200w, ${bg.pc} 2400w`}
+              sizes="100vw"
+              alt=""
+              loading="lazy"
+              decoding="async"
+            />
+          ))}
+        </div>
+        <div className="premium-inner">
+          <div className="premium-box">
+            <div className="premium-box-img">
+              {premiumImages.map((image, index) => (
+                <img
+                  key={`premium-img-${index}`}
+                  src={image.pc}
+                  srcSet={`${image.mo} 1200w, ${image.pc} 2400w`}
+                  sizes="(max-width: 1200px) 80vw, 40vw"
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+              ))}
+              <div className="premium-image-credit">
+                {premiumImageCredits.map((credit, index) => (
+                  <span key={`premium-credit-${index}`} className={credit ? '' : 'is-empty'}>
+                    {credit}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="premium-desc-box">
+              {premiumSlides.map((slide) => (
+                <div key={slide.name}>
+                  <h4 className="premium-name">{slide.name}</h4>
+                  <p className="premium-desc" dangerouslySetInnerHTML={{ __html: slide.desc }} />
+                  <h3 className="premium-box-title">{slide.title}</h3>
+                </div>
               ))}
             </div>
-          </div>
-          <div className="premium-desc-box">
-            {premiumSlides.map((slide) => (
-              <div key={slide.name}>
-                <h4 className="premium-name">{slide.name}</h4>
-                <p className="premium-desc" dangerouslySetInnerHTML={{ __html: slide.desc }} />
-                <h3 className="premium-box-title">{slide.title}</h3>
+            <a href="#premium" className="premium-rotate-btn">
+              <div className="premium-rotate-circle">
+                <img src={premiumLogo} alt="" className="premium-rotate-logo" />
               </div>
-            ))}
+              <svg className="premium-rotate-text" viewBox="0 0 200 200" aria-hidden="true">
+                <defs>
+                  <path
+                    id="premiumRotatePath"
+                    d="M100,100 m-70,0 a70,70 0 1,1 140,0 a70,70 0 1,1 -140,0"
+                  />
+                </defs>
+                <text>
+                  <textPath href="#premiumRotatePath" startOffset="0">
+                    • HOBAN SUMMIT ELITE CITY • HOBAN SUMMIT ELITE CITY • HOBAN SUMMIT ELITE CITY •
+                  </textPath>
+                </text>
+              </svg>
+            </a>
           </div>
-          <a href="#premium" className="premium-rotate-btn">
-            <div className="premium-rotate-circle">
-              <img src={premiumLogo} alt="" className="premium-rotate-logo" />
-            </div>
-            <svg className="premium-rotate-text" viewBox="0 0 200 200" aria-hidden="true">
-              <defs>
-                <path
-                  id="premiumRotatePath"
-                  d="M100,100 m-70,0 a70,70 0 1,1 140,0 a70,70 0 1,1 -140,0"
-                />
-              </defs>
-              <text>
-                <textPath href="#premiumRotatePath" startOffset="0">
-                  • HOBAN SUMMIT ELITE CITY • HOBAN SUMMIT ELITE CITY • HOBAN SUMMIT ELITE CITY •
-                </textPath>
-              </text>
-            </svg>
-          </a>
         </div>
       </div>
     </section>

@@ -194,21 +194,23 @@ const useMainAnimations = () => {
 
     const premiumSlides = document.querySelectorAll('.premium-desc-box > div');
     const premiumCount = Math.max(1, premiumSlides.length);
+    const premiumTransitions = Math.max(1, premiumCount - 1);
     const premiumCredits = document.querySelectorAll('.premium-image-credit > span');
     const premiumScrollPerSlide = isMobile ? 1.6 : 1.2;
     const premiumEnd = () =>
-      `+=${Math.round(window.innerHeight * premiumCount * premiumScrollPerSlide)}`;
+      `+=${Math.round(window.innerHeight * premiumTransitions * premiumScrollPerSlide)}`;
     const premiumTl = gsap.timeline({
+      defaults: { ease: 'none' },
       scrollTrigger: {
         id: 'premium-pin',
-        trigger: '.main-section-premium',
+        trigger: '.premium-pin',
         start: 'top top',
         end: premiumEnd,
         scrub: true,
         pin: true,
         pinSpacing: true,
         invalidateOnRefresh: true,
-        anticipatePin: 1,
+        anticipatePin: 2,
       },
     });
     if (premiumTl.scrollTrigger) createdTriggers.push(premiumTl.scrollTrigger);
@@ -220,7 +222,7 @@ const useMainAnimations = () => {
 
     if (premiumCount > 1) {
       for (let index = 1; index < premiumCount; index += 1) {
-        const step = index;
+        const step = index - 1;
         const current = index;
         const next = index + 1;
 

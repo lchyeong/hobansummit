@@ -679,6 +679,16 @@
   .main-section-premium {
     height: auto;
     min-height: 100svh;
+    padding: 0;
+  }
+
+  .premium-entry {
+    height: 0;
+  }
+
+  .premium-pin {
+    height: auto;
+    min-height: 100svh;
     padding: 100px 0 80px;
   }
 
@@ -886,7 +896,7 @@
   }
 
   .brand-card-section {
-    min-height: 300svh;
+    min-height: 400svh;
   }
 
   .inquiry-inner {
