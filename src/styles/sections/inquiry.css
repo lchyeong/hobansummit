@@ -116,6 +116,22 @@
   opacity: 1;
 }
 
+.inquiry-honeypot {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.inquiry-honeypot > input {
+  width: 1px;
+  height: 1px;
+  border: 0;
+  padding: 0;
+}
+
 .inquiry-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -217,4 +233,24 @@
 
 .inquiry-submit:active {
   transform: translateY(0);
+}
+
+.inquiry-submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.72;
+  box-shadow: none;
+  transform: none;
+}
+
+.inquiry-status {
+  font-size: 14px;
+  padding-left: clamp(0px, 2vw, 20px);
+}
+
+.inquiry-status.success {
+  color: #2a6d42;
+}
+
+.inquiry-status.error {
+  color: #c16d60;
 }

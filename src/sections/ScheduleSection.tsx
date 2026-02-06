@@ -62,7 +62,7 @@ const ScheduleSection = () => {
           </ul>
         </div>
         <div className="schedule-btn-box">
-          <a href="tel:1600-1730">전화상담하기</a>
+          <a href="tel:1844-1474">전화상담하기</a>
           <a href="#inquiry">방문예약하기</a>
         </div>
       </div>
