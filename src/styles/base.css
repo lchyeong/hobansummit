@@ -132,7 +132,7 @@ ul {
 }
 
 .public-section {
-  scroll-margin-top: var(--header-height);
+  scroll-margin-top: 0;
 }
 
 #wrap {

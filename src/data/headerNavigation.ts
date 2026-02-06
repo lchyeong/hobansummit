@@ -13,6 +13,7 @@ export type NavItem = {
 
 export const HEADER_NAV_ITEMS: NavItem[] = [
   { label: 'HOME', href: '#visual' },
+  { label: '문의', href: '#inquiry' },
   { label: '평면', href: '#unit' },
   { label: '혜택', href: '#schedule' },
   { label: '조경', href: '#landscape' },
@@ -24,6 +25,7 @@ export const HEADER_NAV_ITEMS: NavItem[] = [
 
 export const HAMBURGER_NAV_ITEMS: NavItem[] = [
   { label: 'HOME', href: '#visual' },
+  { label: '문의', href: '#inquiry' },
   { label: '평면', href: '#unit' },
   { label: '혜택', href: '#schedule' },
   { label: '조경', href: '#landscape' },

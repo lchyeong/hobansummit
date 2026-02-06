@@ -2,11 +2,12 @@
 .main-section-inquiry {
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   min-height: 100vh;
   min-height: 100dvh;
-  padding: clamp(90px, 10vh, 140px) 0;
+  scroll-margin-top: 0;
+  padding: calc(var(--header-height) + clamp(20px, 4vh, 60px)) 0 clamp(80px, 10vh, 140px);
   background: linear-gradient(135deg, #f7f2ed 0%, #ffffff 45%, #f1ebe6 100%);
   overflow: hidden;
 }
