@@ -8,8 +8,19 @@ import { Autoplay, Navigation } from 'swiper/modules';
 const useMainAnimations = () => {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
-    ScrollTrigger.config({ autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load' });
+    ScrollTrigger.config({
+      autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load,resize,orientationchange',
+    });
     const createdTriggers: ScrollTrigger[] = [];
+    let refreshRafId = 0;
+
+    const queueScrollTriggerRefresh = () => {
+      if (refreshRafId) cancelAnimationFrame(refreshRafId);
+      refreshRafId = requestAnimationFrame(() => {
+        refreshRafId = 0;
+        ScrollTrigger.refresh();
+      });
+    };
 
     const visualSplit = new SplitType('.visual-title > p', { types: 'chars' });
     const scheduleSplit = new SplitType('.schedule-title', { types: 'chars' });
@@ -217,13 +228,13 @@ const useMainAnimations = () => {
       scrollTrigger: {
         id: 'premium-pin',
         trigger: '.main-section-premium',
-        start: 'top',
+        start: 'top top',
         end: premiumEnd,
         scrub: true,
         pin: true,
         pinSpacing: true,
         invalidateOnRefresh: true,
-        anticipatePin: 0,
+        anticipatePin: 1,
       },
     });
     if (premiumTl.scrollTrigger) createdTriggers.push(premiumTl.scrollTrigger);
@@ -317,11 +328,59 @@ const useMainAnimations = () => {
       scrollIndicator.classList.toggle('hide', scrollTop + windowHeight >= documentHeight - 100);
     };
 
+    const refreshOnImageLoadTargets = Array.from(
+      document.querySelectorAll<HTMLImageElement>(
+        '.main-section-green img, .main-section-premium img, .main-section-overview img, .brand-card-section img'
+      )
+    );
+    const imageRefreshCleanups: Array<() => void> = [];
+
+    refreshOnImageLoadTargets.forEach((image) => {
+      if (image.complete) return;
+      const handleLoad = () => queueScrollTriggerRefresh();
+      image.addEventListener('load', handleLoad, { once: true });
+      image.addEventListener('error', handleLoad, { once: true });
+      imageRefreshCleanups.push(() => {
+        image.removeEventListener('load', handleLoad);
+        image.removeEventListener('error', handleLoad);
+      });
+    });
+
+    const observedSections = [
+      document.querySelector<HTMLElement>('.main-section-green'),
+      document.querySelector<HTMLElement>('.main-section-premium'),
+    ].filter((section): section is HTMLElement => Boolean(section));
+    const resizeObserver =
+      typeof ResizeObserver === 'undefined'
+        ? null
+        : new ResizeObserver(() => {
+            queueScrollTriggerRefresh();
+          });
+
+    observedSections.forEach((section) => resizeObserver?.observe(section));
+    let isFontsReadyCancelled = false;
+    document.fonts?.ready.then(() => {
+      if (!isFontsReadyCancelled) queueScrollTriggerRefresh();
+    });
+    const delayedRefreshId = window.setTimeout(() => {
+      queueScrollTriggerRefresh();
+    }, 350);
+
     window.addEventListener('scroll', handleScrollIndicator);
+    window.addEventListener('resize', queueScrollTriggerRefresh);
+    window.addEventListener('orientationchange', queueScrollTriggerRefresh);
     handleScrollIndicator();
+    queueScrollTriggerRefresh();
 
     return () => {
       window.removeEventListener('scroll', handleScrollIndicator);
+      window.removeEventListener('resize', queueScrollTriggerRefresh);
+      window.removeEventListener('orientationchange', queueScrollTriggerRefresh);
+      if (refreshRafId) cancelAnimationFrame(refreshRafId);
+      window.clearTimeout(delayedRefreshId);
+      isFontsReadyCancelled = true;
+      imageRefreshCleanups.forEach((cleanup) => cleanup());
+      resizeObserver?.disconnect();
       visualSplit.revert();
       scheduleSplit.revert();
       unitButtonHandlers.forEach(({ button, handler }) => button.removeEventListener('click', handler));

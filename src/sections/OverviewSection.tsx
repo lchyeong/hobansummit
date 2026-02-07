@@ -12,8 +12,10 @@ const OverviewSection = () => {
               <img
                 className="overview-map"
                 src={overviewMap}
+                width={3294}
+                height={2800}
                 alt=""
-                loading="lazy"
+                loading="eager"
                 decoding="async"
               />
             </picture>

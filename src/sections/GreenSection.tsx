@@ -100,9 +100,11 @@ const GreenSection = () => {
                           src={slide.image}
                           srcSet={`${slide.imageMo} 1200w, ${slide.image} 2400w`}
                           sizes="(max-width: 1200px) 80vw, 50vw"
+                          width={1775}
+                          height={1244}
                           alt=""
                           className="green-img"
-                          loading="lazy"
+                          loading="eager"
                           decoding="async"
                         />
                       ) : null}
