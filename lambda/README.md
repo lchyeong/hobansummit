@@ -44,3 +44,4 @@ Lambda 실행 Role에 최소 아래 권한이 필요합니다.
 ## Frontend Variable
 
 프론트에서는 `.env`의 `VITE_INQUIRY_API_URL`에 API Gateway URL을 넣으면 됩니다.
+수정

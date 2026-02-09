@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent, type FormEvent } from 'react';
+import { useState, type ChangeEvent, type FormEvent, type MouseEvent } from 'react';
 import { submitInquiry } from '../utils/inquiryApi';
 
 const hourOptions = (() => {
@@ -68,6 +68,20 @@ const InquirySection = () => {
   const setError = (message: string) => {
     setStatusType('error');
     setStatusMessage(message);
+  };
+
+  const handleDateInputClick = (event: MouseEvent<HTMLInputElement>) => {
+    const input = event.currentTarget as HTMLInputElement & {
+      showPicker?: () => void;
+    };
+
+    if (!input.showPicker) return;
+
+    try {
+      input.showPicker();
+    } catch {
+      // Fallback to native date input behavior on unsupported browsers.
+    }
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -198,6 +212,7 @@ const InquirySection = () => {
                 required
                 value={form.date}
                 onChange={handleChange}
+                onClick={handleDateInputClick}
               />
             </label>
             <label className="inquiry-field" htmlFor="inquiry-time">

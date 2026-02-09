@@ -16,6 +16,15 @@ const CARD_IMAGES = {
   card3: { pc: cardImage3, mo: cardImage3Mo },
 };
 
+const COMPACT_BREAKPOINT = 1200;
+const PHASE_DISTANCE_MULTIPLIER_COMPACT = 2.5;
+const PHASE_DISTANCE_MULTIPLIER_DESKTOP = 2.1;
+const PHASE_DISTANCE_MIN_COMPACT = 560;
+const PHASE_DISTANCE_MIN_DESKTOP = 760;
+const COMPACT_START_EXTRA_PX = 8;
+const OUTRO_DISTANCE_MULTIPLIER_COMPACT = 0.95;
+const OUTRO_DISTANCE_MULTIPLIER_DESKTOP = 0.55;
+
 const BrandCardSection = () => {
   const sectionRef = useRef<HTMLElement | null>(null);
 
@@ -70,12 +79,54 @@ const BrandCardSection = () => {
       const logoImgs = selector('.card-desc-logo img');
 
       if (!cardSlide || !cardBox || !card1 || !card2 || !card3) return;
+      const phaseDuration = 1;
+      const firstPhaseStart = 0;
+      const secondPhaseStart = firstPhaseStart + phaseDuration;
+      const compactMedia = window.matchMedia(`(max-width: ${COMPACT_BREAKPOINT}px)`);
 
       const getOffsets = () => {
         const style = window.getComputedStyle(cardBox);
         const offset1 = Number.parseFloat(style.getPropertyValue('--card-offset-1')) || 16;
         const offset2 = Number.parseFloat(style.getPropertyValue('--card-offset-2')) || 32;
         return { offset1, offset2 };
+      };
+      const getHeaderHeight = () => {
+        const rootStyle = window.getComputedStyle(document.documentElement);
+        const raw = rootStyle.getPropertyValue('--header-height');
+        const parsed = Number.parseFloat(raw);
+        return Number.isFinite(parsed) ? parsed : 0;
+      };
+      const getCardMetrics = () => {
+        const compact = compactMedia.matches;
+        const slideRect = cardSlide.getBoundingClientRect();
+        const cardRect = cardBox.getBoundingClientRect();
+        const { offset1, offset2 } = getOffsets();
+        const topGap = Math.max(0, cardRect.top - slideRect.top);
+        const bottomGap = Math.max(0, slideRect.bottom - cardRect.bottom);
+        const cardHeight = Math.max(1, cardRect.height);
+        const phaseMultiplier = compact
+          ? PHASE_DISTANCE_MULTIPLIER_COMPACT
+          : PHASE_DISTANCE_MULTIPLIER_DESKTOP;
+        const phaseMin = compact ? PHASE_DISTANCE_MIN_COMPACT : PHASE_DISTANCE_MIN_DESKTOP;
+        const phaseDistancePx = Math.round(Math.max(cardHeight * phaseMultiplier, phaseMin));
+        const headerHeight = getHeaderHeight();
+        const startOffsetPx = compact
+          ? Math.max(0, Math.round(topGap - headerHeight + COMPACT_START_EXTRA_PX))
+          : 0;
+        const outroMultiplier = compact
+          ? OUTRO_DISTANCE_MULTIPLIER_COMPACT
+          : OUTRO_DISTANCE_MULTIPLIER_DESKTOP;
+        const outroDistancePx = Math.round(
+          Math.max(bottomGap + Math.abs(offset1), cardHeight * outroMultiplier, Math.abs(offset2 - offset1))
+        );
+        const scrollDistancePx = Math.round(phaseDistancePx * 2 + outroDistancePx);
+        const outroHoldUnits = Math.max(0.2, outroDistancePx / phaseDistancePx);
+        return {
+          compact,
+          startOffsetPx,
+          scrollDistancePx,
+          outroHoldUnits,
+        };
       };
 
       const resetCards = () => {
@@ -98,63 +149,82 @@ const BrandCardSection = () => {
       gsap.set(logoImgs, { filter: 'brightness(0) invert(1)' });
 
       ScrollTrigger.getById('brand-card-pin')?.kill();
+      let cardMetrics = getCardMetrics();
       const cardTl = gsap.timeline({ defaults: { ease: 'none' }, paused: true });
+      const holdProxy = { value: 0 };
 
-      cardTl
-        .to(
-          cardSlide,
-          {
-            backgroundColor: '#ffffff',
-            duration: 0.5,
-          },
-          0
-        )
-        .to(
-          cardText,
-          {
-            color: '#175a5b',
-            duration: 0.5,
-          },
-          0
-        )
-        .to(
-          logoImgs,
-          {
-            filter: 'brightness(1) invert(0)',
-            duration: 0.5,
-          },
-          0
-        )
-        .to(desc01, { transform: 'translateY(-110%)' }, 0)
-        .to(desc02, { transform: 'translateY(0%)' }, 0)
-        .to(card1, { yPercent: -200, duration: 1 }, 0)
-        .to(card2, { y: 0, duration: 1 }, 0)
-        .to(card3, { y: () => getOffsets().offset1, duration: 1 }, 0)
-        .to(desc02, { transform: 'translateY(-110%)' }, 1)
-        .to(desc03, { transform: 'translateY(0%)' }, 1)
-        .to(card2, { yPercent: -200, duration: 1 }, 1)
-        .to(card3, { y: 0, duration: 1 }, 1);
+      const rebuildTimeline = () => {
+        cardTl.clear();
+        holdProxy.value = 0;
+        cardTl
+          .to(
+            cardSlide,
+            {
+              backgroundColor: '#ffffff',
+              duration: phaseDuration * 0.5,
+            },
+            firstPhaseStart
+          )
+          .to(
+            cardText,
+            {
+              color: '#175a5b',
+              duration: phaseDuration * 0.5,
+            },
+            firstPhaseStart
+          )
+          .to(
+            logoImgs,
+            {
+              filter: 'brightness(1) invert(0)',
+              duration: phaseDuration * 0.5,
+            },
+            firstPhaseStart
+          )
+          .to(desc01, { transform: 'translateY(-110%)' }, firstPhaseStart)
+          .to(desc02, { transform: 'translateY(0%)' }, firstPhaseStart)
+          .to(card1, { yPercent: -200, duration: phaseDuration }, firstPhaseStart)
+          .to(card2, { y: 0, duration: phaseDuration }, firstPhaseStart)
+          .to(card3, { y: () => getOffsets().offset1, duration: phaseDuration }, firstPhaseStart)
+          .to(desc02, { transform: 'translateY(-110%)' }, secondPhaseStart)
+          .to(desc03, { transform: 'translateY(0%)' }, secondPhaseStart)
+          .to(card2, { yPercent: -200, duration: phaseDuration }, secondPhaseStart)
+          .to(card3, { y: 0, duration: phaseDuration }, secondPhaseStart)
+          .to(
+            holdProxy,
+            {
+              value: 1,
+              duration: cardMetrics.outroHoldUnits,
+            },
+            secondPhaseStart + phaseDuration
+          );
+      };
 
-      const cardSteps = 2;
-      const getScrollFactor = () =>
-        (window.matchMedia('(max-width: 1200px)').matches ? 0.85 : 1.8);
-      const getPinDistancePx = () =>
-        Math.round(window.innerHeight * cardSteps * getScrollFactor());
-      const pinDistance = () => `+=${getPinDistancePx()}`;
+      rebuildTimeline();
 
       ScrollTrigger.create({
         id: 'brand-card-pin',
         trigger: pinWrap ?? sectionRef.current,
-        start: 'top top',
-        end: pinDistance,
+        start: () => {
+          cardMetrics = getCardMetrics();
+          if (!cardMetrics.compact) return 'top top';
+          return `top+=${cardMetrics.startOffsetPx} top`;
+        },
+        end: () => {
+          cardMetrics = getCardMetrics();
+          return `+=${cardMetrics.scrollDistancePx}`;
+        },
         scrub: true,
         pin: cardSlide,
         pinSpacing: true,
+        pinType: compactMedia.matches ? 'transform' : 'fixed',
         anticipatePin: 1,
         invalidateOnRefresh: true,
         refreshPriority: -1,
         animation: cardTl,
         onRefreshInit: () => {
+          cardMetrics = getCardMetrics();
+          rebuildTimeline();
           resetCards();
           resetText();
           gsap.set(cardSlide, { backgroundColor: '#c16d60' });
