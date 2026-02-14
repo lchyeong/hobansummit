@@ -25,12 +25,7 @@ const FooterSection = () => {
             <ul className="footer-list footer-list-inline">
               <li>사업명 : 호반써밋 ELITE CITY (구미)</li>
               <li>주소 : 경북 구미시 산동읍 신당리 1474</li>
-              <li>모델하우스 : 구미시 광평동 529-1</li>
               <li>대표번호 1844-1474</li>
-            </ul>
-            <ul className="footer-list footer-list-inline">
-              <li>시행 : 티에스자산개발</li>
-              <li>시공 : 호반건설산업</li>
             </ul>
             <ul className="footer-disclaimer">
               <li>
