@@ -908,25 +908,20 @@
   }
 
   .footer-list {
-    flex-direction: column;
     gap: 6px;
   }
 
-  .footer-list-inline {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
+  .footer-list-grid {
+    grid-template-columns: 1fr;
+    width: 100%;
+    row-gap: 6px;
   }
 
-  .footer-list-inline > li {
+  .footer-list-grid > li {
     padding: 0;
   }
 
-  .footer-list-inline > li::after {
-    display: none;
-  }
-
-  .footer-list > li::after {
+  .footer-list-grid > li::after {
     display: none;
   }
 }

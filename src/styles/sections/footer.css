@@ -46,27 +46,28 @@
   font-size: 14px;
 }
 
-.footer-list-inline {
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 0 0;
+.footer-list-grid {
+  display: grid;
+  grid-template-columns: repeat(3, max-content);
+  row-gap: 10px;
   align-items: center;
+  width: fit-content;
 }
 
-.footer-list-inline > li {
+.footer-list-grid > li {
   position: relative;
   padding: 0 14px;
 }
 
-.footer-list-inline > li:first-child {
+.footer-list-grid > li:nth-child(3n + 1) {
   padding-left: 0;
 }
 
-.footer-list-inline > li:last-child {
+.footer-list-grid > li:nth-child(3n) {
   padding-right: 0;
 }
 
-.footer-list-inline > li:not(:last-child)::after {
+.footer-list-grid > li:not(:nth-child(3n))::after {
   position: absolute;
   content: '';
   width: 1px;

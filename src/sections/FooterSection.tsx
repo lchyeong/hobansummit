@@ -22,10 +22,13 @@ const FooterSection = () => {
         <div className="footer-right">
           <img src={logo} alt="" className="footer-logo" />
           <div className="footer-box">
-            <ul className="footer-list footer-list-inline">
+            <ul className="footer-list footer-list-grid">
               <li>사업명 : 호반써밋 ELITE CITY (구미)</li>
               <li>주소 : 경북 구미시 산동읍 신당리 1474</li>
               <li>대표번호 1844-1474</li>
+              <li>상호명 : 서브웰 주식회사</li>
+              <li>대표자 : 박상완</li>
+              <li>사업자번호 : 167-86-01723</li>
             </ul>
             <ul className="footer-disclaimer">
               <li>
