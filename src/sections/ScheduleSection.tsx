@@ -2,9 +2,9 @@ import scheduleBg from '../assets/images/schedule/혜택섹션_배경이미지.p
 import scheduleBgMo from '../assets/images/schedule/혜택섹션_배경이미지_mo.png';
 
 const scheduleItems = [
-  { title: '현금 지원', date: <span className="point">1,200만원</span> },
+  { title: '현금지원', singleLine: true },
   {
-    title: '국민주택기금 승계',
+    title: '국민주택기금 승계 가능',
     date: '7,000만원',
   },
   {
@@ -13,13 +13,16 @@ const scheduleItems = [
       <>
         대출 가능
         <br />
-        이율 2%~3%
+        이율 2 ~ 3%대
       </>
     ),
   },
   { title: '평당 분양가', date: '600만원대' },
-  { title: '옥계 산동 아파트', date: '300만원으로 끝' },
-  { title: '즉시 입주', date: '가능' },
+  {
+    title: '1억대~',
+    date: '25평아파트',
+  },
+  { title: '즉시 입주 가능', date: '분양·임대' },
 ];
 
 const ScheduleSection = () => {
@@ -45,8 +48,8 @@ const ScheduleSection = () => {
           <ul className="schedule-table">
             {scheduleItems.map((item, index) => (
               <li
-                key={`${item.title}-${item.date}`}
-                className={`hover_ani${index === 0 ? ' is-highlight' : ''}`}
+                key={`schedule-${index}`}
+                className={`hover_ani${item.singleLine ? ' is-single-line' : ''}`}
                 data-color="#C3A07E"
               >
                 <span className="line" />
@@ -56,7 +59,7 @@ const ScheduleSection = () => {
                 <span className="con">
                   <span className="con-text">{item.title}</span>
                 </span>
-                <p className="day">{item.date}</p>
+                {item.date ? <p className="day">{item.date}</p> : null}
               </li>
             ))}
           </ul>

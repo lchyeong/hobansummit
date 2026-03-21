@@ -112,7 +112,7 @@
   justify-content: center;
   align-items: center;
   min-width: 0;
-  gap: 10px;
+  gap: 16px;
   background: #c16d60;
   grid-column: span 1;
   aspect-ratio: 320 / 184;
@@ -122,6 +122,11 @@
   opacity: 0;
   transform: scale(0.8);
   padding: 54px 0 33px;
+}
+
+.schedule-table > li.is-single-line {
+  gap: 0;
+  padding: 0;
 }
 
 .schedule-table > li.wide {
@@ -139,7 +144,7 @@
   font-weight: 700;
   color: #ffffff;
   min-height: 2.2em;
-  line-height: 1.1;
+  line-height: 1.2;
   transition: color 0.5s;
 }
 
@@ -147,49 +152,32 @@
   color: var(--color-sand);
 }
 
-.schedule-table > li.is-highlight .day {
-  color: #ffffff;
-  background: linear-gradient(
-    120deg,
-    #ffffff 0%,
-    #ffffff 35%,
-    #ffe08a 50%,
-    #ffffff 65%,
-    #ffffff 100%
-  );
-  background-size: 320% 100%;
-  background-position: -160% 50%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow:
-    0 0 10px rgba(255, 255, 255, 0.6),
-    0 0 22px rgba(255, 200, 120, 0.55);
-  animation: schedule-shimmer 2.2s ease-in-out infinite;
-  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.35));
-}
-
-@keyframes schedule-shimmer {
-  0% {
-    background-position: -160% 50%;
-  }
-  100% {
-    background-position: 160% 50%;
-  }
-}
-
 .schedule-table .con {
-  font-size: 36px;
+  font-size: 29px;
   font-family: 'Pretendard', sans-serif;
   line-height: 1.1;
   font-weight: 700;
   transition: color 0.5s;
 }
 
+.schedule-table > li.is-single-line .con {
+  font-size: clamp(34px, 3.2vw, 44px);
+  line-height: 1.05;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+}
+
 .schedule-table .con-text {
   display: inline-block;
   white-space: nowrap;
   word-break: keep-all;
+}
+
+.schedule-table > li.is-single-line .con-text {
+  white-space: normal;
+  text-align: center;
 }
 
 .schedule-table > li:hover .con {

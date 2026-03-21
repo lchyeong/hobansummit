@@ -100,16 +100,16 @@
 
 .visual-highlight {
   font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
-  font-size: clamp(34px, 5.4vw, 64px);
+  font-size: clamp(64px, 9.4vw, 116px);
   font-weight: 700;
   letter-spacing: -0.02em;
-  color: #111827;
-  margin: 26px auto 28px;
+  color: #ffffff;
+  margin: 18px auto 18px;
   line-height: 1.05;
   text-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
   display: inline-flex;
   align-items: baseline;
-  gap: 12px;
+  gap: 0;
 }
 
 .visual-highlight-number {

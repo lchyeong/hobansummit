@@ -20,9 +20,7 @@ const VisualSection = () => {
             <span className="visual-title-strong">2,092세대 대단지</span>
           </p>
         </h2>
-        <p className="visual-highlight">
-          <span className="visual-highlight-number">1,200만원</span> 현금 지원
-        </p>
+        <p className="visual-highlight">현금지원</p>
         <p className="visual-logo">구미 옥계 호반 써밋 엘리트시티</p>
       </div>
     </section>
